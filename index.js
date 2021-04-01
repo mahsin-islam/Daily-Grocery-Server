@@ -38,6 +38,14 @@ client.connect(err => {
             })
     });
 
+    app.get('/product', (req, res) => {
+        const queryName = req.query.name
+        productCollection.find({ name: queryName })
+            .toArray((err, documents) => {
+                res.send(documents)
+            })
+    });
+
 
     app.post('/addProduct', (req, res) => {
         const newProduct = req.body;
@@ -64,9 +72,10 @@ client.connect(err => {
     });
 
     app.patch('/update/:id', (req, res) => {
-        todocollection.updateOne({ _id: ObjectId(req.params.id) },
+        const id = ObjectID(req.params.id)
+        productCollection.updateOne({ _id: id },
             {
-                $set: { name: req.body.name }
+                $set: { name: req.body.name, price: req.body.price, quantity: req.body.quantity, description: req.body.description, imageURL: req.body.imageURL }
             })
             .then(result => {
                 res.send(result.modifiedCount > 0)
