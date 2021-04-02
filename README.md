@@ -22,7 +22,9 @@
 * Its almost like simple ecommerce store
 * You can manage product 
 
+[Api Link](https://daily-grocery-server.herokuapp.com/)
+
 [Visit Site](https://daily-grocery-b2c1c.web.app/)
 
 ## Home page!
-![Awesome Transport](src/images/site.png)
+![Daily Grocery](images/site.png)
