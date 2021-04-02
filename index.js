@@ -44,7 +44,15 @@ client.connect(err => {
             })
     });
 
+    app.get('/orders', (req, res) => {
+        const queryEmail = req.query.email
+        ordersCollection.find({ userEmail: queryEmail })
+            .toArray((err, documents) => {
+                res.send(documents)
+            })
+    });
 
+    //post methods
     app.post('/addProduct', (req, res) => {
         const newProduct = req.body;
         productCollection.insertOne(newProduct)
@@ -61,14 +69,7 @@ client.connect(err => {
             })
     });
 
-    app.get('/orders', (req, res) => {
-        const queryEmail = req.query.email
-        ordersCollection.find({ userEmail: queryEmail })
-            .toArray((err, documents) => {
-                res.send(documents)
-            })
-    });
-
+    //patch method
     app.patch('/update/:id', (req, res) => {
         const id = ObjectID(req.params.id)
         productCollection.updateOne({ _id: id },
@@ -80,6 +81,7 @@ client.connect(err => {
             })
     })
 
+    //delete method
     app.delete('/delete/:id', (req, res) => {
         const id = ObjectID(req.params.id)
         productCollection.deleteOne({ _id: id })
