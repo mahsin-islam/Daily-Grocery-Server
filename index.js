@@ -16,6 +16,7 @@ client.connect(err => {
     const productCollection = client.db(`${process.env.DB_NAME}`).collection("products");
     const ordersCollection = client.db(`${process.env.DB_NAME}`).collection("orders");
 
+    //get methods
     app.get('/', (req, res) => {
         res.send('Database is connected!')
     });
